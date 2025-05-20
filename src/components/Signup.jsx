@@ -16,7 +16,7 @@ export default function Signup() {
         formData.append('password', password);
         formData.append('profileImage', profileImage);
 
-        const res = await fetch('${process.env.SERVER_URL}/api/auth/signup', {
+        const res = await fetch('${import.meta.env.VITE_SERVER_URL}/api/auth/signup', {
             method: 'POST',
             body: formData,
         });

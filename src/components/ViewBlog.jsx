@@ -10,7 +10,7 @@ export default function BlogView() {
     useEffect(() => {
         const fetchBlog = async () => {
             const token = localStorage.getItem('token');
-            const res = await fetch(`${process.env.SERVER_URL}/api/blogs/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/blogs/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -39,7 +39,7 @@ export default function BlogView() {
             <div style={{ display: 'flex', justifyContent: "flex-start", alignItems: 'flex-start', gap: '20px' }}>
                 {blog.image && (
                     <img
-                        src={`${process.env.SERVER_URL}${blog.image}`}
+                        src={`${import.meta.env.VITE_SERVER_URL}${blog.image}`}
                         alt={blog.title}
                         style={{ maxWidth: '20%', margin: '20px 0' }}
                     />

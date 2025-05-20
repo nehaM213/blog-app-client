@@ -7,7 +7,7 @@ export default function BlogFeed() {
 
     const fetchBlogs = async () => {
         const token = localStorage.getItem('token');
-        const res = await fetch(`${process.env.SERVER_URL}/api/blogs/feed`, {
+        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/blogs/feed`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -40,17 +40,23 @@ export default function BlogFeed() {
                                 borderRadius: '8px',
                                 padding: '15px',
                                 marginBottom: '20px',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                             }}>
                                 <h3>{blog.title}</h3>
-                                {blog.image && (
-                                    <img
-                                        src={`${process.env.SERVER_URL}/${blog.image}`}
-                                        alt={blog.title}
-                                        style={{ width: '100%', maxWidth: '400px' }}
-                                    />
-                                )}
-                                <p>{blog.description.slice(0, 150)}...</p>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: "flex-start",
+                                    alignItems: "flex-start",
+                                    gap: '10px',
+                                }}>
+                                    {blog.image && (
+                                        <img
+                                            src={`${import.meta.env.VITE_SERVER_URL}${blog.image}`}
+                                            alt={blog.title}
+                                            style={{ width: '200%', maxWidth: '70px' }}
+                                        />
+                                    )}
+                                    <p style={{ margin: "0px" }}>{blog.description.slice(0, 150)}...</p>
+                                </div>
                             </div>
                         ))
                     )}

@@ -15,7 +15,7 @@ export default function Dashboard() {
                 return;
             }
 
-            const res = await fetch(`${process.env.SERVER_URL}/api/user/dashboard`, {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/user/dashboard`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export default function Dashboard() {
                     <h2>Welcome to your Dashboard</h2>
                     {user.profileImage && (
                         <img
-                            src={`${process.env.SERVER_URL}${user.profileImage}`}
+                            src={`${import.meta.env.VITE_SERVER_URL}${user.profileImage}`}
                             alt="Profile"
                             style={{ width: '70px', height: '70px', borderRadius: '50%' }}
                         />

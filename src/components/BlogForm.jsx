@@ -15,7 +15,7 @@ export default function BlogForm() {
             const fetchBlog = async () => {
                 setLoading(true);
                 const token = localStorage.getItem('token');
-                const res = await fetch(`${process.env.SERVER_URL}/api/blogs/${id}`, {
+                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/blogs/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -44,7 +44,7 @@ export default function BlogForm() {
         setLoading(true);
         const token = localStorage.getItem('token');
 
-        const url = id ? `${process.env.SERVER_URL}/api/blogs/${id}` : '${process.env.SERVER_URL}/api/blogs';
+        const url = id ? `${import.meta.env.VITE_SERVER_URL}/api/blogs/${id}` : `${import.meta.env.VITE_SERVER_URL}/api/blogs`;
         const method = id ? 'PUT' : 'POST';
 
         const res = await fetch(url, {

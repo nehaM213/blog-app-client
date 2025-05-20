@@ -7,7 +7,7 @@ export default function BlogList() {
 
     const fetchBlogs = async () => {
         const token = localStorage.getItem('token');
-        const res = await fetch(`${process.env.SERVER_URL}/api/blogs`, {
+        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/blogs`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -29,7 +29,7 @@ export default function BlogList() {
         if (!confirmDelete) return;
 
         const token = localStorage.getItem('token');
-        const res = await fetch(`${process.env.SERVER_URL}/api/blogs/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/blogs/${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ export default function BlogList() {
                                 <td>
                                     {blog.image && (
                                         <img
-                                            src={`${process.env.SERVER_URL}${blog.image}`}
+                                            src={`${import.meta.env.VITE_SERVER_URL}${blog.image}`}
                                             alt="Blog"
                                             style={{ width: '80px' }}
                                         />
