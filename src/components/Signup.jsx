@@ -11,12 +11,46 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!email || !password) {
+            setError('Please enter email and password.');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError('Please enter a valid email address.');
+            return;
+        }
+
+        if (password.length < 6) {
+            setError('Password must be at least 6 characters.');
+            return;
+        }
+
+        if (profileImage && profileImage.size > 2 * 1024 * 1024) {
+            setError('Profile image must be less than 2MB.');
+            return;
+        }
+
+        const allowed = /jpeg|jpg|png|gif/;
+
+        if (profileImage) {
+            if (!allowed.test(profileImage.type)) {
+                setError('Only JPEG, JPG, PNG, and GIF image types are allowed.');
+                return;
+            }
+            if (profileImage.size > 2 * 1024 * 1024) {
+                setError('Profile image must be less than 2MB.');
+                return;
+            }
+        }
+
         const formData = new FormData();
         formData.append('email', email);
         formData.append('password', password);
         formData.append('profileImage', profileImage);
 
-        const res = await fetch('${import.meta.env.VITE_SERVER_URL}/api/auth/signup', {
+        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/auth/signup`, {
             method: 'POST',
             body: formData,
         });

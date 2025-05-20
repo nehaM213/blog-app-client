@@ -4,7 +4,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 export default function BlogView() {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,14 +22,10 @@ export default function BlogView() {
                 alert('Blog not found or unauthorized');
                 navigate('/blogs');
             }
-
-            setLoading(false);
         };
 
         fetchBlog();
     }, [id, navigate]);
-
-    if (loading) return <p>Loading blog...</p>;
 
     return blog ? (
         <div style={{ padding: '20px' }}>

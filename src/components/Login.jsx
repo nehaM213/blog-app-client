@@ -9,6 +9,17 @@ export default function Login({ setToken }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!email || !password) {
+            setError('Please fill both email and password.');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError('Please enter a valid email.');
+            return;
+        }
         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -18,7 +29,6 @@ export default function Login({ setToken }) {
         if (res.ok) {
             localStorage.setItem('token', data.token);
             setToken(data.token);
-            alert('Login successful!');
             navigate('/dashboard');
         } else {
             setError(data.message);

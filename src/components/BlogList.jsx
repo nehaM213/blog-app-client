@@ -15,8 +15,6 @@ export default function BlogList() {
         const data = await res.json();
         if (res.ok) {
             setBlogs(data);
-        } else {
-            alert('Failed to fetch blogs');
         }
     };
 

@@ -4,7 +4,6 @@ import BlogFeed from './BlogFeed';
 
 export default function Dashboard() {
     const [user, setUser] = useState({ email: '', profileImage: '' });
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,14 +29,10 @@ export default function Dashboard() {
                 localStorage.removeItem('token');
                 navigate('/login');
             }
-
-            setLoading(false);
         };
 
         fetchDashboard();
     }, [navigate]);
-
-    if (loading) return <p>Loading dashboard...</p>;
 
     return (
         <div style={{
